@@ -9,7 +9,7 @@ public class Colecciones {
     ArrayList<String> cars ;
     String[] bikes;
     Set<String> bicicles;
-    HashMap<Integer, String> transport;
+    public HashMap<Integer, String> transport;
 
     public Colecciones(){
         this.cars = new ArrayList<String>();
@@ -38,10 +38,30 @@ public class Colecciones {
         this.bicicles.add("AURUMANIA CRYSTAL EDITION GOLD BIKE");
     }
 
-    public HashMap<Integer, String>  obtenerHash(){
-        int length = cars.size() + bikes.length + bicicles.size();// obtener tamaño
-        int count =1;
-        //this.transport.forEach((key, value) -> System.out.println(key + " " + value)); //imprimir para pruebas
-        return this.transport;
+   public HashMap<Integer, String> obtenerHash(){
+
+        this.transport.clear();
+        Set<String> vistos = new HashSet<>();
+        
+        ArrayList<String> todos = new ArrayList<>();
+        todos.addAll(this.cars);
+        for(String moto : this.bikes) {
+            todos.add(moto);
+        }
+        todos.addAll(this.bicicles);
+        int clave = 1;
+
+        for(String valor : todos){
+            if(valor != null && !valor.trim().isEmpty()){
+
+                if(!vistos.contains(valor)){
+                    vistos.add(valor);
+                    this.transport.put(clave, valor);
+                    clave++; 
+            }
+        }
+    }
+
+    return this.transport;
     }
 }
